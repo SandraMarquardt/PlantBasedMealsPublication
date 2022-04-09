@@ -51,6 +51,7 @@ conda activate mealsEnv
 
 pip install brightway2 pyside2 pyaml futura futura-image wurst bw-recipe-2016
 ```
+> See env_setup.txt for detailed overview of package versions used for this project
 
 ### 1) Process LCI information
 
