@@ -1,10 +1,16 @@
 # PlantBasedMealsPublication
 
+> NOTE:
+> This repository contains two branches
+> * main: a generic implementation of the approach (i.e. usable with licensed ecoinvent data but without the meal case study specific implementations)
+> * case_study_impl: implementation used for the publication (requires additional commercially senstive information that cannot be shared)
+
+
 ## Workspace structure and content
 
 1_LCI
 * Extracting and linking Ecoinvent and WFLDB
-* Extracting and linking meal LCI
+
 
 2_IMAGEParameterFiltering
 * R files to identify link between IMAGE information and approapriate ecoinvent/WFLDB data
@@ -15,9 +21,6 @@
     * adding new methods (Recipe 2016, BII)
     * extracting results to csv for further exploitation
 
-4_ResultsExploitation
-* Exploitation for visualization
-
 888_InputData
 * Input data for all relevant steps
 
@@ -27,12 +30,10 @@
 ## Step-by-step run through
 > NOTE: The following files and folders are NOT included in the git repo
 >
-> Databases can be downloaded under license, AdditionalProcesses files contain comercially sensitive data and cannot be shared
+> Databases can be downloaded under license
 
 * 888_InputData\Ecoinvent\datasets [download ecoinvent 3.5_cutoff_ecoSpold02.7z from [ecoinvent](http://www.ecoinvent.org) and extract]
 * 888_InputData\WLFDB/WFLDB35_20200109_edited.CSV [Export WFLDB from SimaPro as .csv and make the edits listed below]
-* 888_InputData\CaseStudyCustomDatasets\DE_AdditionalProcesses_2020_11_05.TXT [SimaPro extract of custom additional datasets]
-* 888_InputData\CaseStudyCustomDatasets\ID_AdditionalProcesses_2020_11_06.TXT [SimaPro extract of custom additional datasets]
 
 > Edits required to WFLDB SimaPro export:
 > - Replace `;min;` with `;minute;`
@@ -51,15 +52,16 @@
 conda create -n mealsEnv python=3
 conda activate mealsEnv
 
-pip install brightway2 pyside2 pyaml futura futura-image wurst bw-recipe-2016
+pip install brightway2 pyside2 pyaml futura futura-image>=0.0.5 wurst bw-recipe-2016
 ```
+> See env_setup.txt for detailed overview of package versions used for this project
 
 ### 1) Process LCI information
 
 
 #### 1.1) Create brightway project containing Ecoinvent and WFLDB
 
-> Importing WFLDB into Brightway is a complex process which we have compiled into a script, this script creates a project called `EcoWFLDB_DE_ID`, to change this edit the `project_name` variable in the script.
+> Importing WFLDB into Brightway is a complex process which we have compiled into a script, this script creates a project called `EcoWFLDB`, to change this edit the `project_name` variable in the script.
 
 `cd` to `1_LCI`
 
@@ -71,32 +73,12 @@ python LinkEcoinventWFLDB.py
 
 * Input
     * 888_InputData\Ecoinvent\ecoinvent 3.5_cutoff_ecoSpold02.7 [not on git]
-    * 888_InputData\Ecoinvent\35_migration_2.pickle
+    * 888_InputData\Ecoinvent\35_migration_2.pickle [not on git]
     * 888_InputData\WFLDB\WFLDB35_20200109_edited.CSV [not on git]
 * Output
     * BW project with ecoinvent and WFLDB databases
 
-#### 1.2) Extract and link case study LCI information
-```
-python ImportAdditionalDatasets_DEcaseStudy.py
-```
-* Input
-    * 888_InputData\CaseStudyCustomDatasets\DE_Meals.xlsx
-    * 888_InputData\CaseStudyCustomDatasets\DE_AdditionalProcesses_2020_11_05.TXT [not on git]
-* Output
-    * Added DE case study meals to brightway project
-
-```
-python ImportAdditionalDatasets_IDcaseStudy.py
-```
-* Input
-    * 888_InputData\CaseStudyCustomDatasets\ID_Meals.xlsx
-    * 888_InputData\CaseStudyCustomDatasets\ID_Meals_Subassembly.xlsx
-    * 888_InputData\CaseStudyCustomDatasets\ID_AdditionalProcesses_2020_11_06.TXT [not on git]
-* Output
-    * Added ID case study meals to brightway project
-
-#### 1.3) Generate .fl file for use in Futura runs
+#### 1.2) Generate .fl file for use in Futura runs
 
 ```
 python GenerateFL.py
@@ -106,7 +88,7 @@ python GenerateFL.py
   * [Brightway database generated in previous steps]
 
 * Output
-  * /999_Output/LCI/Ecoinvent_WFLDB_PBM_DE_ID_save.fl
+  * /999_Output/LCI/Ecoinvent_WFLDB_save.fl
 
 ### 2)  Getting IMAGE data ready 
 #### 2.1) Harmonizing mapping with ecoinvent/WFLDB
@@ -147,7 +129,7 @@ Run TransformIMAGEData.R
 Navigate to 3_ProspectiveLCA (using anaconda cmd) [see commands.txt for concrete examples]
 python PBM_create_run.py {scen} {year}
 * Input
-    * 999_Output\LCI\BaseLoader\Ecoinvent_WFLDB_PBM_DE_ID_save.fl
+    * 999_Output\LCI\BaseLoader\Ecoinvent_WFLDB_save.fl
 	* 999_Output\IMAGEParameterFiltering\/{Scen}/IMAGE_Electricity_{Scen}.xlsx
 	* 999_Output\IMAGEParameterFiltering\Ecoinv2IMAGE_Electricity.xlsx
 	* 999_Output\IMAGEParameterFiltering\/{Scen}/IMAGE_Area_CropYield_{Scen}.xlsx
@@ -170,11 +152,3 @@ python NewMethods_Recipe2016_BII.py {project_name}
     * 888_InputData/Mappings/Ecoinvent2BII_2021_01_12.xlsx
 * Output
     * additional methods stored in brightway2 project
-
-#### 3.4) Extract LCA results of scenarios as csv files
-python ResultExploitation.py {project_name} {database_name} {scen} {year}
-* Input
-    * databases of the selected project
-* Output
-    * 999_Output\ProspectiveLCA\ForExploitation\{LCA_method}_{scen}_{year}_{meal}.csv
-    * 999_Output\ProspectiveLCA\ForExploitation\{LCA_method}_{scen}_{year}_{meal}_meal_comp.csv
