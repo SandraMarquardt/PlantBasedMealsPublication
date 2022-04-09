@@ -15,9 +15,6 @@
     * adding new methods (Recipe 2016, BII)
     * extracting results to csv for further exploitation
 
-4_ResultsExploitation
-* Exploitation for visualization
-
 888_InputData
 * Input data for all relevant steps
 
