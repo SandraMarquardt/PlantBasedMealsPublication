@@ -1,5 +1,10 @@
 # PlantBasedMealsPublication
 
+> NOTE:
+> This repository contains two branches
+> * main: a generic implementation of the approach (i.e. usable with licensed ecoinvent data but without the meal case study specific implementations)
+> * case_study_impl: implementation used for the publication (requires additional commercially senstive information that cannot be shared)
+
 ## Workspace structure and content
 
 1_LCI
