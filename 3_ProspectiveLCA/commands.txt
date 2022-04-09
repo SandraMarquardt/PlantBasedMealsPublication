@@ -1,0 +1,56 @@
+python scritpName.py scen year
+
+### Start year 2015 ##########
+
+python PBM_create_run.py SSP2 2015 
+
+### All  #################
+
+#Scen = SSP1, SSP2, SSP3 [adapt accordingly]
+#Year = 2015, 2050
+
+python PBM_create_run.py {Scen} {Year} 
+
+
+#################################
+
+### DB extraction (to brightway project)
+
+# generalized 
+python DB_Extract.py {file_name} {db_name} {project_name}
+
+# examples
+### Start year
+
+python DB_Extract.py 2015_SSP2.fl pbm_All_2015_SSP2 PBM_All
+
+### All
+
+python DB_Extract.py 2050_SSP1.fl pbm_All_2050_SSP1 PBM_All
+python DB_Extract.py 2050_SSP2.fl pbm_All_2050_SSP2 PBM_All
+python DB_Extract.py 2050_SSP3.fl pbm_All_2050_SSP3 PBM_All
+
+#################################
+
+### Add new methods (ReCiPe 2016 and BII) to relevant projects
+
+# generalized
+python NewMethods_Recipe2016_BII.py {project_name}
+
+#example 
+python NewMethods_Recipe2016_BII.py PBM_All
+
+#################################
+
+### Converting results to csv for further analysis
+
+# generalized
+python ResultExploitation.py {project_name} {db_name} {scenario} {year}
+
+# examples
+scenario_year = SSP2_2015; SSPx_2050
+
+python ResultExploitation.py PBM_All pbm_All_2015_SSP2 SSP2 2015
+
+
+
