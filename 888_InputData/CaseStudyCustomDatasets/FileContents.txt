@@ -1,0 +1,67 @@
+Missing files in git (due to copyright)
+
+DE_AdditionalProcesses_2020_11_05.TXT - contains SimaPro implementations for the following processes:
+- beef, fresh meat
+- garlic, dehydrated
+- lentils, canned
+- olive olive
+- onion, dehydrated
+- pasta
+- tomato, dehydrated,
+- tomato, fresh
+- Unilever Knorr Mealmaker Spaghetti Bolognese
+- Aluminium packaging
+- LDPE packaging
+- PET packaging
+- can packaging
+- storage - ambient
+- storage - chilled
+- lentils, dry 
+- canning fruits or vegetables
+- boiling, beef meal 
+- boiling, lentil meal
+- boiling, pasta 
+- frying, beef 
+- frying, lentils 
+
+ID_AdditionalProcesses_2020_11_06.TXT - - contains SimaPro implementations for the following processes:
+- banana
+- bean
+- cabbage
+- carrot
+- celery
+- chicken egg
+- chili
+- garlic
+- melon
+- moringa leaves
+- onion
+- palm oil 
+- potatoes 
+- rice
+- soy sauce
+- soybean sprouts 
+- sweet corn 
+- tofu
+- Unilver Royco chicken 
+- aluminium packaging
+- cardboard food packaging
+- LDPE packaging
+- PET packaging
+- PP packaging
+- PVC packaging
+- storage - ambient
+- storage - chilled
+- boiling, industrial
+- deep-frying, industrial
+- electirc boiling, industrial
+- oven baking, industrial
+- boiling, beans
+- boiling, chicken
+- boiling, chicken soup
+- boiling, rice
+- boiling, tofu soup
+- frying, omelet
+- sauté, vegetables
+
+

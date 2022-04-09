@@ -30,6 +30,7 @@
 > Databases can be downloaded under license, AdditionalProcesses files contain comercially sensitive data and cannot be shared
 
 * 888_InputData\Ecoinvent\datasets [download ecoinvent 3.5_cutoff_ecoSpold02.7z from [ecoinvent](http://www.ecoinvent.org) and extract]
+* 888_InputData\Ecoinvent\35_migration_2.pickle
 * 888_InputData\WLFDB/WFLDB35_20200109_edited.CSV [Export WFLDB from SimaPro as .csv and make the edits listed below]
 * 888_InputData\CaseStudyCustomDatasets\DE_AdditionalProcesses_2020_11_05.TXT [SimaPro extract of custom additional datasets]
 * 888_InputData\CaseStudyCustomDatasets\ID_AdditionalProcesses_2020_11_06.TXT [SimaPro extract of custom additional datasets]
@@ -71,7 +72,7 @@ python LinkEcoinventWFLDB.py
 
 * Input
     * 888_InputData\Ecoinvent\ecoinvent 3.5_cutoff_ecoSpold02.7 [not on git]
-    * 888_InputData\Ecoinvent\35_migration_2.pickle
+    * 888_InputData\Ecoinvent\35_migration_2.pickle [not on git]
     * 888_InputData\WFLDB\WFLDB35_20200109_edited.CSV [not on git]
 * Output
     * BW project with ecoinvent and WFLDB databases
